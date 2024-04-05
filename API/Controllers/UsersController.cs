@@ -81,8 +81,6 @@ public class UsersController : BaseApiController
             PublicId = result.PublicId
         };
 
-        if (user.Photos.Count == 0) photo.IsMain = true;
-
         user.Photos.Add(photo);
 
         if (await _uow.Complete())
@@ -105,6 +103,8 @@ public class UsersController : BaseApiController
         if (photo == null) return NotFound();
 
         if (photo.IsMain) return BadRequest("This is already your main photo");
+
+        if (!photo.IsApproved) return BadRequest("The photo needs to be approved first");
 
         var currentMain = user.Photos.FirstOrDefault(p => p.IsMain);
 

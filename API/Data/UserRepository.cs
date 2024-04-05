@@ -24,6 +24,7 @@ public class UserRepository : IUserRepository
         return await _context.Users
             .Where(x => x.UserName == username)
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            .IgnoreQueryFilters()
             .SingleOrDefaultAsync();
     }
 

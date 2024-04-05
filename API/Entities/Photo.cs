@@ -10,6 +10,8 @@ public class Photo
     public bool IsMain { get; set; }
     public string PublicId { get; set; }
 
+    public bool IsApproved { get; set; } = false;
+
     public int AppUserId { get; set; }
     public AppUser AppUser { get; set; }
 }
